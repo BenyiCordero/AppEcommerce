@@ -21,7 +21,7 @@ public class Persona {
     private String primerApellido;
     @Column(name = "segundoApellido")
     private String segundoApellido;
-    @Column(name = "Direccion")
-    private String Direccion;
+    @Column(name = "direccion")
+    private String direccion;
 
 }
