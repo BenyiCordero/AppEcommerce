@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface PersonaService {
 
-    void crearPersona(Persona persona);
+    Persona crearPersona(Persona persona);
     void actualizarPersona(Persona persona);
     List<Persona> listaPersonas();
     Optional<Persona> buscarPersonaById(Long id);

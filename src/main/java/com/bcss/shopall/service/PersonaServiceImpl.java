@@ -18,8 +18,8 @@ public class PersonaServiceImpl implements PersonaService {
 
 
     @Override
-    public void crearPersona(Persona persona) {
-        personaRepository.save(persona);
+    public Persona crearPersona(Persona persona) {
+        return personaRepository.save(persona);
     }
 
     @Override
