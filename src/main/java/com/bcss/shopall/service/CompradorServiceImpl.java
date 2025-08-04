@@ -1,5 +1,6 @@
 package com.bcss.shopall.service;
 
+import com.bcss.shopall.domain.Carrito;
 import com.bcss.shopall.domain.Comprador;
 import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.repository.CompradorRepository;
@@ -13,17 +14,21 @@ public class CompradorServiceImpl implements CompradorService {
 
     private final CompradorRepository compradorRepository;
     private final PersonaService personaService;
+    private final CarritoService carritoService;
 
-    public CompradorServiceImpl(CompradorRepository compradorRepository, PersonaService personaService) {
+    public CompradorServiceImpl(CompradorRepository compradorRepository, PersonaService personaService, CarritoService carritoService) {
         this.compradorRepository = compradorRepository;
         this.personaService = personaService;
+        this.carritoService = carritoService;
     }
 
     @Override
-    public void crearComprador(Comprador comprador) {
+    public Comprador crearComprador(Comprador comprador) {
         Persona persona = personaService.crearPersona(comprador.getPersona());
+        Carrito carrito = carritoService.crearCarrito(comprador.getCarrito());
+        comprador.setCarrito(carrito);
         comprador.setPersona(persona);
-        compradorRepository.save(comprador);
+        return compradorRepository.save(comprador);
     }
 
     @Override
