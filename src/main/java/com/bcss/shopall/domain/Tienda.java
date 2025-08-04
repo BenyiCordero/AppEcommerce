@@ -17,5 +17,8 @@ public class Tienda {
     private Long idTienda;
     @Column(name = "nombre")
     private String nombre;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_inventario", referencedColumnName = "idInventario")
+    private Inventario inventario;
 
 }

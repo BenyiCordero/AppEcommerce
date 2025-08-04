@@ -1,5 +1,6 @@
 package com.bcss.shopall.service;
 
+import com.bcss.shopall.domain.Inventario;
 import com.bcss.shopall.domain.Tienda;
 import com.bcss.shopall.repository.TiendaRepository;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,17 @@ import java.util.Optional;
 public class TiendaServiceImpl implements TiendaService {
 
     private final TiendaRepository tiendaRepository;
+    private final InventarioService inventarioService;
 
-    public TiendaServiceImpl(TiendaRepository tiendaRepository) {
+    public TiendaServiceImpl(TiendaRepository tiendaRepository, InventarioService inventarioService) {
         this.tiendaRepository = tiendaRepository;
+        this.inventarioService = inventarioService;
     }
 
     @Override
     public Tienda crearTienda(Tienda tienda) {
+        Inventario inventario = inventarioService.crearInventario(tienda.getInventario());
+        tienda.setInventario(inventario);
         return tiendaRepository.save(tienda);
     }
 
