@@ -19,5 +19,8 @@ public class Producto {
     private String descripcion;
     @Column(name = "codigo")
     private String codigo;
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", referencedColumnName = "idCategoria")
+    private Categoria categoria;
 
 }
