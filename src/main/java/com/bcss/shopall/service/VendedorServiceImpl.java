@@ -1,6 +1,7 @@
 package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Persona;
+import com.bcss.shopall.domain.Tienda;
 import com.bcss.shopall.domain.Vendedor;
 import com.bcss.shopall.repository.VendedorRepository;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,19 @@ public class VendedorServiceImpl implements VendedorService {
 
     private final VendedorRepository vendedorRepository;
     private final PersonaService personaService;
+    private final TiendaService tiendaService;
 
-    public VendedorServiceImpl(VendedorRepository vendedorRepository, PersonaService personaService) {
+    public VendedorServiceImpl(VendedorRepository vendedorRepository, PersonaService personaService, TiendaService tiendaService) {
         this.vendedorRepository = vendedorRepository;
         this.personaService = personaService;
+        this.tiendaService = tiendaService;
     }
 
     @Override
     public void crearVendedor(Vendedor vendedor) {
         Persona persona = personaService.crearPersona(vendedor.getPersona());
+        Tienda tienda = tiendaService.crearTienda(vendedor.getTienda());
+        vendedor.setTienda(tienda);
         vendedor.setPersona(persona);
         vendedorRepository.save(vendedor);
     }
