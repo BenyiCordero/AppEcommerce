@@ -23,12 +23,12 @@ public class VendedorServiceImpl implements VendedorService {
     }
 
     @Override
-    public void crearVendedor(Vendedor vendedor) {
+    public Vendedor crearVendedor(Vendedor vendedor) {
         Persona persona = personaService.crearPersona(vendedor.getPersona());
         Tienda tienda = tiendaService.crearTienda(vendedor.getTienda());
         vendedor.setTienda(tienda);
         vendedor.setPersona(persona);
-        vendedorRepository.save(vendedor);
+        return vendedorRepository.save(vendedor);
     }
 
     @Override

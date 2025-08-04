@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface VendedorService {
 
-    void crearVendedor(Vendedor vendedor);
+    Vendedor crearVendedor(Vendedor vendedor);
     void actualizarVendedor(Vendedor vendedor);
     void eliminarVendedor(Long id);
     List<Vendedor> listaVendedores();
