@@ -1,6 +1,6 @@
 package com.bcss.shopall.service;
 
-import com.bcss.shopall.dto.Vendedor;
+import com.bcss.shopall.domain.Vendedor;
 
 import java.util.List;
 import java.util.Optional;

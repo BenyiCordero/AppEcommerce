@@ -1,7 +1,7 @@
 package com.bcss.shopall.service;
 
-import com.bcss.shopall.dto.Comprador;
-import com.bcss.shopall.dto.Persona;
+import com.bcss.shopall.domain.Comprador;
+import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.repository.CompradorRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.bcss.shopall.dto;
+package com.bcss.shopall.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

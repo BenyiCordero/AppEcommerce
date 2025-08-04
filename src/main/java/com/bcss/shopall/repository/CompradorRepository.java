@@ -1,6 +1,6 @@
 package com.bcss.shopall.repository;
 
-import com.bcss.shopall.dto.Comprador;
+import com.bcss.shopall.domain.Comprador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
