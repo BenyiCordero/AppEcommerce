@@ -1,0 +1,38 @@
+package com.bcss.shopall.service;
+
+import com.bcss.shopall.domain.Producto;
+import com.bcss.shopall.repository.ProductoRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProductoServiceImpl implements ProductoService {
+
+    private final ProductoRepository productoRepository;
+
+    public ProductoServiceImpl(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
+
+    @Override
+    public Producto crearProducto(Producto producto) {
+        return productoRepository.save(producto);
+    }
+
+    @Override
+    public void ActualizarProducto(Producto producto) {
+
+    }
+
+    @Override
+    public Optional<Producto> findProductoById(Long id) {
+        return  productoRepository.findById(id);
+    }
+
+    @Override
+    public List<Producto> findAllProductos() {
+        return productoRepository.findAll();
+    }
+}
