@@ -21,7 +21,7 @@ public class ReseniaServiceImpl implements ReseniaService {
 
     @Override
     public Resenia crearResenia(Resenia resenia) {
-        Optional<Producto> producto = productoService.findProductoById(resenia.getProducto().getIdProducto());
+        Optional<Producto> producto = productoService.buscarProductoPorId(resenia.getProducto().getIdProducto());
         resenia.setProducto(producto.get());
         return reseniaRepository.save(resenia);
     }
@@ -43,6 +43,6 @@ public class ReseniaServiceImpl implements ReseniaService {
 
     @Override
     public List<Resenia> listaReseniasPorProducto(Long id) {
-        return reseniaRepository.findByProducto(productoService.findProductoById(id).get());
+        return reseniaRepository.findByProducto(productoService.buscarProductoPorId(id).get());
     }
 }

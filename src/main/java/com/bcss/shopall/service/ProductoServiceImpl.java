@@ -27,12 +27,12 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Optional<Producto> findProductoById(Long id) {
+    public Optional<Producto> buscarProductoPorId(Long id) {
         return  productoRepository.findById(id);
     }
 
     @Override
-    public List<Producto> findAllProductos() {
+    public List<Producto> listaProductos() {
         return productoRepository.findAll();
     }
 }

@@ -9,7 +9,7 @@ public interface ProductoService {
 
     Producto crearProducto(Producto producto);
     void ActualizarProducto(Producto producto);
-    Optional<Producto> findProductoById(Long id);
-    List<Producto> findAllProductos();
+    Optional<Producto> buscarProductoPorId(Long id);
+    List<Producto> listaProductos();
 
 }
