@@ -18,5 +18,8 @@ public class Comprador {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona" , referencedColumnName = "idPersona")
     private Persona persona;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_carrito", referencedColumnName = "idCarrito")
+    private Carrito carrito;
 
 }
