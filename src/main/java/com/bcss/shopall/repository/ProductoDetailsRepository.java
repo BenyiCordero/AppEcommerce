@@ -1,15 +1,15 @@
 package com.bcss.shopall.repository;
 
 import com.bcss.shopall.domain.Inventario;
-import com.bcss.shopall.domain.InventarioDetails;
+import com.bcss.shopall.domain.ProductoDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface InventarioDetailsRepository extends JpaRepository<InventarioDetails, Long> {
+public interface ProductoDetailsRepository extends JpaRepository<ProductoDetails, Long> {
 
-    List<InventarioDetails> findByInventario(Inventario inventario);
+    List<ProductoDetails> findByInventario(Inventario inventario);
 
 }

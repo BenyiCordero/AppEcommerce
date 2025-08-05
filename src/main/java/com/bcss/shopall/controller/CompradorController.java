@@ -49,8 +49,8 @@ public class CompradorController {
         return ResponseEntity.status(HttpStatus.OK).body(compradorService.listaCompradores());
     }
 
-    @GetMapping
-    public ResponseEntity<?> compradorPorId(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> compradorPorId(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(compradorService.buscarCompradorPorId(id));
     }
 
