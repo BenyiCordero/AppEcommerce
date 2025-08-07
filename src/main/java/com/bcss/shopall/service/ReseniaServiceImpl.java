@@ -3,6 +3,7 @@ package com.bcss.shopall.service;
 import com.bcss.shopall.domain.Producto;
 import com.bcss.shopall.domain.Resenia;
 import com.bcss.shopall.repository.ReseniaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,14 +20,14 @@ public class ReseniaServiceImpl implements ReseniaService {
         this.productoService = productoService;
     }
 
-    @Override
+    @Transactional
     public Resenia crearResenia(Resenia resenia) {
         Optional<Producto> producto = productoService.buscarProductoPorId(resenia.getProducto().getIdProducto());
         resenia.setProducto(producto.get());
         return reseniaRepository.save(resenia);
     }
 
-    @Override
+    @Transactional
     public void actualizarResenia(Resenia resenia) {
 
     }

@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Inventario;
 import com.bcss.shopall.repository.InventarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +17,17 @@ public class InventarioServiceImpl implements InventarioService {
         this.inventarioRepository = inventarioRepository;
     }
 
-    @Override
+    @Transactional
     public Inventario crearInventario(Inventario inventario) {
         return  inventarioRepository.save(inventario);
     }
 
-    @Override
+    @Transactional
     public Inventario actualizarInventario(Inventario inventario) {
         return null;
     }
 
-    @Override
+    @Transactional
     public void eliminarInventario(Long id) {
         inventarioRepository.deleteById(id);
     }

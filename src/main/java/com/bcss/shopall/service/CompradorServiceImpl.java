@@ -4,6 +4,7 @@ import com.bcss.shopall.domain.Carrito;
 import com.bcss.shopall.domain.Comprador;
 import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.repository.CompradorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class CompradorServiceImpl implements CompradorService {
         this.carritoService = carritoService;
     }
 
-    @Override
+    @Transactional
     public Comprador crearComprador(Comprador comprador) {
         Persona persona = personaService.crearPersona(comprador.getPersona());
         Carrito carrito = carritoService.crearCarrito(comprador.getCarrito());
@@ -31,12 +32,12 @@ public class CompradorServiceImpl implements CompradorService {
         return compradorRepository.save(comprador);
     }
 
-    @Override
+    @Transactional
     public void actualizarComprador(Comprador comprador) {
 
     }
 
-    @Override
+    @Transactional
     public void eliminarComprador(Long id) {
         Optional<Comprador> comprador = compradorRepository.findById(id);
         comprador.ifPresent(compradorRepository::delete);

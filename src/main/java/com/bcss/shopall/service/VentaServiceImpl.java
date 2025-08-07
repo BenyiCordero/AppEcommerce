@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Venta;
 import com.bcss.shopall.repository.VentaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class VentaServiceImpl implements VentaService{
         this.ventaRepository = ventaRepository;
     }
 
-    @Override
+    @Transactional
     public Venta crearVenta(Venta venta) {
         return ventaRepository.save(venta);
     }

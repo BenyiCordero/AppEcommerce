@@ -3,6 +3,7 @@ package com.bcss.shopall.service;
 import com.bcss.shopall.domain.CarritoDetails;
 import com.bcss.shopall.domain.Producto;
 import com.bcss.shopall.repository.CarritoDetailsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class CarritoDetailsServiceImpl implements CarritoDetailsService {
         this.carritoService = carritoService;
     }
 
-    @Override
+    @Transactional
     public CarritoDetails crearCarritoDetails(CarritoDetails carritoDetails) {
         Optional<Producto> producto = productoService.buscarProductoPorId(carritoDetails.getProducto().getIdProducto());
         carritoDetails.setProducto(producto.get());

@@ -5,6 +5,7 @@ import com.bcss.shopall.domain.MetodoPago;
 import com.bcss.shopall.domain.MetodoPagoDetails;
 import com.bcss.shopall.domain.Venta;
 import com.bcss.shopall.repository.MetodoPagoDetailsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class MetodoPagoDetailsServiceImpl implements MetodoPagoDetailsService {
         this.metodoPagoService = metodoPagoService;
     }
 
-    @Override
+    @Transactional
     public MetodoPagoDetails crearMetodoPagoDetails(MetodoPagoDetails metodoPagoDetails) {
         Optional<MetodoPago> metodoPago = metodoPagoService.buscarPorId(metodoPagoDetails.getMetodoPago().getIdMetodoPago());
         Optional<Venta> venta = ventaService.buscarPorId(metodoPagoDetails.getVenta().getIdVenta());
