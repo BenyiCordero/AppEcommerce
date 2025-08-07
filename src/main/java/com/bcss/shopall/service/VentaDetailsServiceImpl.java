@@ -1,8 +1,6 @@
 package com.bcss.shopall.service;
 
-import com.bcss.shopall.domain.Producto;
-import com.bcss.shopall.domain.Venta;
-import com.bcss.shopall.domain.VentaDetails;
+import com.bcss.shopall.domain.*;
 import com.bcss.shopall.dto.InventarioDetailsDTO;
 import com.bcss.shopall.repository.VentaDetailsRepository;
 import org.springframework.stereotype.Service;
@@ -17,16 +15,20 @@ public class VentaDetailsServiceImpl implements VentaDetailsService {
     private final VentaService ventaService;
     private final ProductoService productoService;
     private final InventarioDetailsService inventarioDetailsService;
+    private final MetodoPagoDetailsService metodoPagoDetailsService;
+    private final MetodoPagoService metodoPagoService;
 
-    public VentaDetailsServiceImpl(VentaDetailsRepository ventaDetailsRepository, VentaService ventaService, ProductoService productoService, InventarioService inventarioService, InventarioDetailsService inventarioDetailsService) {
+    public VentaDetailsServiceImpl(VentaDetailsRepository ventaDetailsRepository, VentaService ventaService, ProductoService productoService, InventarioService inventarioService, InventarioDetailsService inventarioDetailsService, MetodoPagoDetailsService metodoPagoDetailsService, MetodoPagoService metodoPagoService) {
         this.ventaDetailsRepository = ventaDetailsRepository;
         this.ventaService = ventaService;
         this.productoService = productoService;
         this.inventarioDetailsService = inventarioDetailsService;
+        this.metodoPagoDetailsService = metodoPagoDetailsService;
+        this.metodoPagoService = metodoPagoService;
     }
 
     @Override
-    public VentaDetails crearVentaDetails(VentaDetails ventaDetails) {
+    public VentaDetails crearVentaDetails(VentaDetails ventaDetails, MetodoPagoDetails metodoPagoDetails) {
         Optional<Producto> producto = productoService.buscarProductoPorId(ventaDetails.getProducto().getIdProducto());
         Optional<Venta> venta = ventaService.buscarPorId(ventaDetails.getVenta().getIdVenta());
         ventaDetails.setProducto(producto.get());
@@ -35,6 +37,12 @@ public class VentaDetailsServiceImpl implements VentaDetailsService {
 
         InventarioDetailsDTO inventarioDetailsDTO = new InventarioDetailsDTO(producto.get(), ventaDetails.getCantidad());
 
+        MetodoPagoDetails metodoPagoDetails1 = new MetodoPagoDetails();
+        metodoPagoDetails1.setVenta(venta.get());
+        metodoPagoDetails1.setMetodoPago(metodoPagoDetails.getMetodoPago());
+        metodoPagoDetails1.setCantidad(metodoPagoDetails.getCantidad());
+
+        metodoPagoDetailsService.crearMetodoPagoDetails(metodoPagoDetails1);
         inventarioDetailsService.reducirInventario(inventarioDetailsDTO);
 
         return ventaDetailsRepository.save(ventaDetails);
