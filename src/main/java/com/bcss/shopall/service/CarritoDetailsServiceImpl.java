@@ -13,19 +13,15 @@ import java.util.Optional;
 public class CarritoDetailsServiceImpl implements CarritoDetailsService {
 
     private final CarritoDetailsRepository carritoDetailsRepository;
-    private final ProductoService productoService;
     private final CarritoService carritoService;
 
     public CarritoDetailsServiceImpl(CarritoDetailsRepository carritoDetailsRepository, ProductoService productoService, CarritoService carritoService) {
         this.carritoDetailsRepository = carritoDetailsRepository;
-        this.productoService = productoService;
         this.carritoService = carritoService;
     }
 
     @Transactional
     public CarritoDetails crearCarritoDetails(CarritoDetails carritoDetails) {
-        Optional<Producto> producto = productoService.buscarProductoPorId(carritoDetails.getProducto().getIdProducto());
-        carritoDetails.setProducto(producto.get());
         return carritoDetailsRepository.save(carritoDetails);
     }
 
@@ -37,5 +33,10 @@ public class CarritoDetailsServiceImpl implements CarritoDetailsService {
     @Override
     public List<CarritoDetails> buscarPorCarrito(Long idCarrito) {
         return carritoDetailsRepository.findByCarrito(carritoService.buscarCarritoPorId(idCarrito).get());
+    }
+
+    @Override
+    public List<CarritoDetails> buscarPorComprador(Long idComprador) {
+        return carritoDetailsRepository.findByComprador(idComprador);
     }
 }

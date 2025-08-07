@@ -38,6 +38,8 @@ public class ProductoDetailsController {
         productoService.crearProducto(producto);
 
         productoDetails.setProducto(producto);
+        productoDetails.setCantidad(productoDTO.cantidad());
+        productoDetails.setPrecio(productoDTO.precio());
         productoDetails.setInventario(inventarioService.buscarInventario(productoDTO.idInventario()).get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productoDetailsService.crearInventarioDetails(productoDetails));
