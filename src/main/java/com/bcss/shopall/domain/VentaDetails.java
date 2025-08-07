@@ -15,6 +15,8 @@ public class VentaDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idVentaDetails;
+    @Column(name = "cantidad")
+    private Integer cantidad;
     @ManyToOne
     @JoinColumn(name = "id_producto", referencedColumnName = "idProducto")
     private Producto producto;
