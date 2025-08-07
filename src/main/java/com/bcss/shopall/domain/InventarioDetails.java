@@ -17,6 +17,8 @@ public class InventarioDetails {
     private Long idInventarioDetails;
     @Column(name = "cantidad")
     private Integer cantidad;
+    @Column(name = "precio")
+    private Double precio;
     @ManyToOne
     @JoinColumn(name = "id_inventario", referencedColumnName = "idInventario")
     private Inventario inventario;

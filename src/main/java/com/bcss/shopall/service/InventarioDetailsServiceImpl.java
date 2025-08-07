@@ -30,6 +30,7 @@ public class InventarioDetailsServiceImpl implements InventarioDetailsService {
         inventarioDetails.setInventario(inventario.get());
         inventarioDetails.setProducto(producto.get());
         inventarioDetails.setCantidad(inventarioDetails.getCantidad());
+        inventarioDetails.setPrecio(inventarioDetails.getPrecio());
 
         return  inventarioDetailsRepository.save(inventarioDetails);
     }

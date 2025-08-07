@@ -34,6 +34,7 @@ public class VentaDetailsServiceImpl implements VentaDetailsService {
         ventaDetails.setProducto(producto.get());
         ventaDetails.setVenta(venta.get());
         ventaDetails.setCantidad(ventaDetails.getCantidad());
+        ventaDetails.setTotal(ventaDetails.getTotal());
 
         InventarioDetailsDTO inventarioDetailsDTO = new InventarioDetailsDTO(producto.get(), ventaDetails.getCantidad());
 

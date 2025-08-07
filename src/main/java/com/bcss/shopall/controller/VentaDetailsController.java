@@ -28,6 +28,7 @@ public class VentaDetailsController {
     @PostMapping
     public ResponseEntity<?> crearVentaDetails(@RequestBody VentaDTO ventaDTO) {
         Producto producto = productoService.buscarProductoPorId(ventaDTO.id_producto()).get();
+        Double precioUnitario = productoDetailsService.findByProducto(producto).getPrecio();
         Venta venta = new Venta();
         VentaDetails ventaDetails = new VentaDetails();
         MetodoPagoDetails metodoPagoDetails = new MetodoPagoDetails();
@@ -36,6 +37,7 @@ public class VentaDetailsController {
         ventaDetails.setProducto(producto);
         ventaDetails.setCantidad(ventaDTO.cantidad());
         ventaDetails.setVenta(venta);
+        ventaDetails.setTotal(ventaDTO.cantidad() * precioUnitario);
         metodoPagoDetails.setCantidad(ventaDTO.cantidad_m().doubleValue());
         metodoPagoDetails.setVenta(venta);
         metodoPagoDetails.setMetodoPago(metodoPagoService.buscarPorId(ventaDTO.id_metodo()).get());

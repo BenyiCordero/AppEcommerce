@@ -17,6 +17,8 @@ public class VentaDetails {
     private Long idVentaDetails;
     @Column(name = "cantidad")
     private Integer cantidad;
+    @Column(name = "total")
+    private Double total;
     @ManyToOne
     @JoinColumn(name = "id_producto", referencedColumnName = "idProducto")
     private Producto producto;
