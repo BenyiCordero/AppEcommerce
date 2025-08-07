@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Categoria;
 import com.bcss.shopall.repository.CategoriaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +17,17 @@ public class CategoriaServiceImpl implements CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    @Override
+    @Transactional
     public Categoria crearCategoria(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
-    @Override
+    @Transactional
     public void actualizarCategoria(Long id) {
 
     }
 
-    @Override
+    @Transactional
     public void eliminarCategoria(Long id) {
         categoriaRepository.deleteById(id);
     }

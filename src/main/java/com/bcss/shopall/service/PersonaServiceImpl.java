@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.repository.PersonaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +18,12 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
 
-    @Override
+    @Transactional
     public Persona crearPersona(Persona persona) {
         return personaRepository.save(persona);
     }
 
-    @Override
+    @Transactional
     public void actualizarPersona(Persona persona) {
         personaRepository.save(persona);
     }

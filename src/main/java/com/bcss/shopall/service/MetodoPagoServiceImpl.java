@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.MetodoPago;
 import com.bcss.shopall.repository.MetodoPagoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +17,12 @@ public class MetodoPagoServiceImpl implements MetodoPagoService {
         this.metodoPagoRepository = metodoPagoRepository;
     }
 
-    @Override
+    @Transactional
     public MetodoPago crearMetodoPago(MetodoPago metodoPago) {
         return metodoPagoRepository.save(metodoPago);
     }
 
-    @Override
+    @Transactional
     public void actualizarMetodoPago(MetodoPago metodoPago) {
 
     }

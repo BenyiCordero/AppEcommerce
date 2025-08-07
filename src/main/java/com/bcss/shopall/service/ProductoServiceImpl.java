@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Producto;
 import com.bcss.shopall.repository.ProductoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +17,12 @@ public class ProductoServiceImpl implements ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    @Override
+    @Transactional
     public Producto crearProducto(Producto producto) {
         return productoRepository.save(producto);
     }
 
-    @Override
+    @Transactional
     public void ActualizarProducto(Producto producto) {
 
     }

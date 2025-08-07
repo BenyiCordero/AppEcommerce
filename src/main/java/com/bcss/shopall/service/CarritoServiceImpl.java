@@ -2,6 +2,7 @@ package com.bcss.shopall.service;
 
 import com.bcss.shopall.domain.Carrito;
 import com.bcss.shopall.repository.CarritoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class CarritoServiceImpl implements CarritoService {
         this.carritoRepository = carritoRepository;
     }
 
-    @Override
+    @Transactional
     public Carrito crearCarrito(Carrito carrito) {
         return carritoRepository.save(carrito);
     }

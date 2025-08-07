@@ -4,6 +4,7 @@ import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.domain.Tienda;
 import com.bcss.shopall.domain.Vendedor;
 import com.bcss.shopall.repository.VendedorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class VendedorServiceImpl implements VendedorService {
         this.tiendaService = tiendaService;
     }
 
-    @Override
+    @Transactional
     public Vendedor crearVendedor(Vendedor vendedor) {
         Persona persona = personaService.crearPersona(vendedor.getPersona());
         Tienda tienda = tiendaService.crearTienda(vendedor.getTienda());
@@ -31,12 +32,12 @@ public class VendedorServiceImpl implements VendedorService {
         return vendedorRepository.save(vendedor);
     }
 
-    @Override
+    @Transactional
     public void actualizarVendedor(Vendedor vendedor) {
 
     }
 
-    @Override
+    @Transactional
     public void eliminarVendedor(Long id) {
         Optional<Vendedor> vendedor = vendedorRepository.findById(id);
         vendedor.ifPresent(vendedorRepository::delete);

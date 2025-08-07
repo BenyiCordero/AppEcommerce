@@ -3,6 +3,7 @@ package com.bcss.shopall.service;
 import com.bcss.shopall.domain.*;
 import com.bcss.shopall.dto.InventarioDetailsDTO;
 import com.bcss.shopall.repository.VentaDetailsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,6 @@ public class VentaDetailsServiceImpl implements VentaDetailsService {
     private final ProductoService productoService;
     private final InventarioDetailsService inventarioDetailsService;
     private final MetodoPagoDetailsService metodoPagoDetailsService;
-    private final MetodoPagoService metodoPagoService;
 
     public VentaDetailsServiceImpl(VentaDetailsRepository ventaDetailsRepository, VentaService ventaService, ProductoService productoService, InventarioService inventarioService, InventarioDetailsService inventarioDetailsService, MetodoPagoDetailsService metodoPagoDetailsService, MetodoPagoService metodoPagoService) {
         this.ventaDetailsRepository = ventaDetailsRepository;
@@ -24,10 +24,9 @@ public class VentaDetailsServiceImpl implements VentaDetailsService {
         this.productoService = productoService;
         this.inventarioDetailsService = inventarioDetailsService;
         this.metodoPagoDetailsService = metodoPagoDetailsService;
-        this.metodoPagoService = metodoPagoService;
     }
 
-    @Override
+    @Transactional
     public VentaDetails crearVentaDetails(VentaDetails ventaDetails, MetodoPagoDetails metodoPagoDetails) {
         Optional<Producto> producto = productoService.buscarProductoPorId(ventaDetails.getProducto().getIdProducto());
         Optional<Venta> venta = ventaService.buscarPorId(ventaDetails.getVenta().getIdVenta());

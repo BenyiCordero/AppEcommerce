@@ -5,6 +5,7 @@ import com.bcss.shopall.domain.InventarioDetails;
 import com.bcss.shopall.domain.Producto;
 import com.bcss.shopall.dto.InventarioDetailsDTO;
 import com.bcss.shopall.repository.InventarioDetailsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class InventarioDetailsServiceImpl implements InventarioDetailsService {
         return inventarioDetailsRepository.findByProducto(producto).get();
     }
 
-    @Override
+    @Transactional
     public InventarioDetails reducirInventario(InventarioDetailsDTO inventarioDetailsDTO) {
         Producto producto  = inventarioDetailsDTO.producto();
         InventarioDetails inventarioDetails =  inventarioDetailsRepository.findByProducto(producto).get();
