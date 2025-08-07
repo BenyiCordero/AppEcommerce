@@ -15,6 +15,8 @@ public class CarritoDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCarritoDetails;
+    @Column(name = "cantidad")
+    private Integer cantidad;
     @ManyToOne
     @JoinColumn(name = "id_carrito", referencedColumnName = "idCarrito")
     private Carrito carrito;

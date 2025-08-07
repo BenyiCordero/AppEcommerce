@@ -10,5 +10,5 @@ public interface CarritoDetailsService {
     CarritoDetails crearCarritoDetails(CarritoDetails carritoDetails);
     Optional<CarritoDetails> buscarPorId(Long id);
     List<CarritoDetails> buscarPorCarrito(Long idCarrito);
-
+    List<CarritoDetails> buscarPorComprador(Long idComprador);
 }
