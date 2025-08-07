@@ -10,11 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "InventarioDetails")
-public class ProductoDetails {
+public class InventarioDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInventarioDetails;
+    @Column(name = "cantidad")
+    private Integer cantidad;
     @ManyToOne
     @JoinColumn(name = "id_inventario", referencedColumnName = "idInventario")
     private Inventario inventario;
