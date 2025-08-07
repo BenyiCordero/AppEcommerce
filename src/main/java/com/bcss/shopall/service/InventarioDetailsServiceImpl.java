@@ -17,7 +17,7 @@ public class InventarioDetailsServiceImpl implements InventarioDetailsService {
     private final ProductoService productoService;
     private final InventarioService inventarioService;
 
-    public InventarioDetailsServiceImpl(InventarioDetailsRepository inventarioDetailsRepository, ProductoService productoService, InventarioService inventarioService, VentaDetailsService ventaDetailsService) {
+    public InventarioDetailsServiceImpl(InventarioDetailsRepository inventarioDetailsRepository, ProductoService productoService, InventarioService inventarioService) {
         this.inventarioDetailsRepository = inventarioDetailsRepository;
         this.productoService = productoService;
         this.inventarioService = inventarioService;

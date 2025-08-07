@@ -15,12 +15,14 @@ public class VentaDetailsController {
     private final ProductoService productoService;
     private final InventarioDetailsService productoDetailsService;
     private final VentaDetailsService ventaDetailsService;
+    private final MetodoPagoService metodoPagoService;
 
-    public VentaDetailsController(VentaService ventaService, ProductoService productoService, InventarioService inventarioService, InventarioDetailsService productoDetailsService, VentaDetailsService ventaDetailsService) {
+    public VentaDetailsController(VentaService ventaService, ProductoService productoService, InventarioService inventarioService, InventarioDetailsService productoDetailsService, VentaDetailsService ventaDetailsService, MetodoPagoService metodoPagoService) {
         this.ventaService = ventaService;
         this.productoService = productoService;
         this.productoDetailsService = productoDetailsService;
         this.ventaDetailsService = ventaDetailsService;
+        this.metodoPagoService = metodoPagoService;
     }
 
     @PostMapping
@@ -28,13 +30,17 @@ public class VentaDetailsController {
         Producto producto = productoService.buscarProductoPorId(ventaDTO.id_producto()).get();
         Venta venta = new Venta();
         VentaDetails ventaDetails = new VentaDetails();
+        MetodoPagoDetails metodoPagoDetails = new MetodoPagoDetails();
 
         ventaService.crearVenta(venta);
         ventaDetails.setProducto(producto);
         ventaDetails.setCantidad(ventaDTO.cantidad());
         ventaDetails.setVenta(venta);
+        metodoPagoDetails.setCantidad(ventaDTO.cantidad_m().doubleValue());
+        metodoPagoDetails.setVenta(venta);
+        metodoPagoDetails.setMetodoPago(metodoPagoService.buscarPorId(ventaDTO.id_metodo()).get());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(ventaDetailsService.crearVentaDetails(ventaDetails));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ventaDetailsService.crearVentaDetails(ventaDetails, metodoPagoDetails));
     }
 
     @GetMapping("/{id}")
