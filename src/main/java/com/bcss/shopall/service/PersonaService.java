@@ -11,5 +11,6 @@ public interface PersonaService {
     void actualizarPersona(Persona persona);
     List<Persona> listaPersonas();
     Optional<Persona> buscarPersonaById(Long id);
+    Optional<Persona> findByEmail(String email);
 
 }

@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface CompradorService {
 
-    Comprador crearComprador(Comprador comprador);
     void actualizarComprador(Comprador comprador);
     void eliminarComprador(Long id);
     List<Comprador> listaCompradores();

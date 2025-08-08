@@ -24,15 +24,6 @@ public class CompradorServiceImpl implements CompradorService {
     }
 
     @Transactional
-    public Comprador crearComprador(Comprador comprador) {
-        Persona persona = personaService.crearPersona(comprador.getPersona());
-        Carrito carrito = carritoService.crearCarrito(comprador.getCarrito());
-        comprador.setCarrito(carrito);
-        comprador.setPersona(persona);
-        return compradorRepository.save(comprador);
-    }
-
-    @Transactional
     public void actualizarComprador(Comprador comprador) {
 
     }
