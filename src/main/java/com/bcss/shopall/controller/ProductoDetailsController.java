@@ -3,12 +3,15 @@ package com.bcss.shopall.controller;
 import com.bcss.shopall.domain.InventarioDetails;
 import com.bcss.shopall.domain.Producto;
 import com.bcss.shopall.dto.ProductoDTO;
+import com.bcss.shopall.exceptions.DatosNoValidosException;
 import com.bcss.shopall.service.CategoriaService;
 import com.bcss.shopall.service.InventarioDetailsService;
 import com.bcss.shopall.service.InventarioService;
 import com.bcss.shopall.service.ProductoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,7 +31,10 @@ public class ProductoDetailsController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearProducto(@RequestBody ProductoDTO productoDTO) {
+    public ResponseEntity<?> crearProducto(@Valid @RequestBody ProductoDTO productoDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new DatosNoValidosException("Error de validacion" , bindingResult);
+        }
         Producto producto = new Producto();
         InventarioDetails productoDetails = new InventarioDetails();
 
