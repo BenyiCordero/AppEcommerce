@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/venta")
+@RequestMapping("/ventas")
 public class VentaDetailsController {
 
     private final VentaService ventaService;

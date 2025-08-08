@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.management.relation.Role;
 
 @RestController
-@RequestMapping("/comprador")
+@RequestMapping("/compradores")
 public class CompradorController {
 
     private final CompradorService compradorService;
