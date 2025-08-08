@@ -4,11 +4,14 @@ import com.bcss.shopall.domain.Carrito;
 import com.bcss.shopall.domain.Comprador;
 import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.dto.CompradorDTO;
+import com.bcss.shopall.exceptions.DatosNoValidosException;
 import com.bcss.shopall.service.CarritoService;
 import com.bcss.shopall.service.CompradorService;
 import com.bcss.shopall.service.PersonaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +29,10 @@ public class CompradorController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearComprador(@RequestBody CompradorDTO compradorDTO) {
+    public ResponseEntity<?> crearComprador(@Valid @RequestBody CompradorDTO compradorDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new DatosNoValidosException("Error de validacion" , bindingResult);
+        }
         Comprador comprador = new Comprador();
         Persona persona = new Persona();
         Carrito carrito = new Carrito();

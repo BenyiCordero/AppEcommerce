@@ -3,10 +3,13 @@ package com.bcss.shopall.controller;
 import com.bcss.shopall.domain.Producto;
 import com.bcss.shopall.domain.Resenia;
 import com.bcss.shopall.dto.ReseniaDTO;
+import com.bcss.shopall.exceptions.DatosNoValidosException;
 import com.bcss.shopall.service.ProductoService;
 import com.bcss.shopall.service.ReseniaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +25,10 @@ public class ReseniaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearResenia (@RequestBody ReseniaDTO reseniaDTO) {
+    public ResponseEntity<?> crearResenia (@Valid @RequestBody ReseniaDTO reseniaDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new DatosNoValidosException("Error de validacion" , bindingResult);
+        }
         Producto producto = productoService.buscarProductoPorId(reseniaDTO.idProducto()).get();
         Resenia resenia = new Resenia();
 

@@ -2,9 +2,12 @@ package com.bcss.shopall.controller;
 
 import com.bcss.shopall.domain.*;
 import com.bcss.shopall.dto.VentaDTO;
+import com.bcss.shopall.exceptions.DatosNoValidosException;
 import com.bcss.shopall.service.*;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +29,10 @@ public class VentaDetailsController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearVentaDetails(@RequestBody VentaDTO ventaDTO) {
+    public ResponseEntity<?> crearVentaDetails(@Valid @RequestBody VentaDTO ventaDTO, BindingResult  bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new DatosNoValidosException("Error de validacion" , bindingResult);
+        }
         Producto producto = productoService.buscarProductoPorId(ventaDTO.id_producto()).get();
         Double precioUnitario = productoDetailsService.findByProducto(producto).getPrecio();
         Venta venta = new Venta();

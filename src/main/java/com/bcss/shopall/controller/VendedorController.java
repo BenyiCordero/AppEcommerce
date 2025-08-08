@@ -5,12 +5,15 @@ import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.domain.Tienda;
 import com.bcss.shopall.domain.Vendedor;
 import com.bcss.shopall.dto.VendedorDTO;
+import com.bcss.shopall.exceptions.DatosNoValidosException;
 import com.bcss.shopall.service.InventarioService;
 import com.bcss.shopall.service.PersonaService;
 import com.bcss.shopall.service.TiendaService;
 import com.bcss.shopall.service.VendedorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,7 +33,10 @@ public class VendedorController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearVendedor(@RequestBody VendedorDTO vendedorDTO) {
+    public ResponseEntity<?> crearVendedor(@Valid @RequestBody VendedorDTO vendedorDTO, BindingResult  bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new DatosNoValidosException("Error de validacion" , bindingResult);
+        }
         Vendedor vendedor = new Vendedor();
         Persona  persona = new Persona();
         Tienda tienda = new Tienda();
