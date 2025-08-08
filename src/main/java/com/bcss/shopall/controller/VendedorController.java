@@ -1,5 +1,6 @@
 package com.bcss.shopall.controller;
 
+import com.bcss.shopall.auth.Rol;
 import com.bcss.shopall.domain.Inventario;
 import com.bcss.shopall.domain.Persona;
 import com.bcss.shopall.domain.Tienda;
@@ -46,6 +47,9 @@ public class VendedorController {
         persona.setPrimerApellido(vendedorDTO.primerApellido());
         persona.setSegundoApellido(vendedorDTO.segundoApellido());
         persona.setDireccion(vendedorDTO.direccion());
+        persona.setEmail(vendedorDTO.email());
+        persona.setPassword(vendedorDTO.password());
+        persona.setRol(Rol.VENDEDOR);
         personaService.crearPersona(persona);
 
         tienda.setNombre(vendedorDTO.nombreTienda());

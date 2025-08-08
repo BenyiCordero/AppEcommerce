@@ -37,4 +37,9 @@ public class PersonaServiceImpl implements PersonaService {
     public Optional<Persona> buscarPersonaById(Long id) {
         return personaRepository.findById(id);
     }
+
+    @Override
+    public Optional<Persona> findByEmail(String email) {
+        return personaRepository.findByEmail(email);
+    }
 }

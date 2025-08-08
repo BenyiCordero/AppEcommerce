@@ -1,5 +1,6 @@
 package com.bcss.shopall.controller;
 
+import com.bcss.shopall.auth.Rol;
 import com.bcss.shopall.domain.Carrito;
 import com.bcss.shopall.domain.Comprador;
 import com.bcss.shopall.domain.Persona;
@@ -14,40 +15,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.Role;
+
 @RestController
 @RequestMapping("/comprador")
 public class CompradorController {
 
     private final CompradorService compradorService;
-    private final PersonaService personaService;
-    private final CarritoService carritoService;
 
     public CompradorController(CompradorService compradorService, PersonaService personaService, CarritoService carritoService) {
         this.compradorService = compradorService;
-        this.personaService = personaService;
-        this.carritoService = carritoService;
-    }
-
-    @PostMapping
-    public ResponseEntity<?> crearComprador(@Valid @RequestBody CompradorDTO compradorDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new DatosNoValidosException("Error de validacion" , bindingResult);
-        }
-        Comprador comprador = new Comprador();
-        Persona persona = new Persona();
-        Carrito carrito = new Carrito();
-
-        persona.setNombre(compradorDTO.nombre());
-        persona.setPrimerApellido(compradorDTO.primerApellido());
-        persona.setSegundoApellido(compradorDTO.segundoApellido());
-        persona.setDireccion(compradorDTO.direccion());
-        personaService.crearPersona(persona);
-
-        carritoService.crearCarrito(carrito);
-
-        comprador.setPersona(persona);
-        comprador.setCarrito(carrito);
-        return ResponseEntity.status(HttpStatus.CREATED).body(compradorService.crearComprador(comprador));
     }
 
     @GetMapping
