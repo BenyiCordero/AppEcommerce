@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/resenia")
+@RequestMapping("/resenias")
 public class ReseniaController {
 
     private final ReseniaService reseniaService;
